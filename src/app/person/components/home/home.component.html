@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-title>
+    Active vs Inactive People
+  </mat-card-title>
+  <mat-card-subtitle>
+    Total Users #10
+  </mat-card-subtitle>
+  <mat-card-content>
+    <canvas baseChart 
+      [data]="config.data"
+      [labels]="config.labels"
+      [legend]="config.legend"
+      [chartType]="config.type"
+      (chartHover)="onHover($event)"
+      (chartClick)="onClick($event)">
+    </canvas>
+  </mat-card-content>
+</mat-card>
