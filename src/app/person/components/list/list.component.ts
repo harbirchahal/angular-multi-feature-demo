@@ -18,7 +18,7 @@ export class ListComponent implements OnInit, OnChanges {
   @Output() select = new EventEmitter<number>();
 
   constructor() {
-    this.dataSource = new MatTableDataSource([]);
+    this.dataSource = new MatTableDataSource();
   }
 
   ngOnInit() {

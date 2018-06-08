@@ -26,8 +26,8 @@
         <th mat-header-cell *matHeaderCellDef>Status</th>
         <td mat-cell *matCellDef="let row">
           <mat-chip-list>
-            <mat-chip color="accent" selected="true" *ngIf="row.isActive">Active</mat-chip>
-            <mat-chip color="warn" selected="true" *ngIf="!row.isActive">Inactive</mat-chip>
+            <mat-chip color="accent" *ngIf="row.isActive">Active</mat-chip>
+            <mat-chip color="warn" *ngIf="!row.isActive">Inactive</mat-chip>
           </mat-chip-list>
         </td>
       </ng-container>

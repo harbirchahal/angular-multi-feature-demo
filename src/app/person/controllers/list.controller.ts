@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Person } from '../models';
-import { PersonService } from '../services';
+import { Load } from '../actions';
+import { State, getAllPersons } from '../reducers';
 
 @Component({
   selector: 'person-list',
@@ -18,12 +20,13 @@ export class ListController implements OnInit {
 
   constructor(
     private router: Router,
-    private personService: PersonService
+    private store: Store<State>
   ) {
-    this.persons$ = this.personService.load();
+    this.persons$ = this.store.select(getAllPersons);
   }
 
   ngOnInit() {
+    this.store.dispatch(new Load());
   }
 
   navToDetail(id: number) {

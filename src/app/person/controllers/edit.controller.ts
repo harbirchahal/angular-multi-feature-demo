@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 
 import { Person } from '../models';
-import { PersonService } from '../services';
+import { Select, Update } from '../actions';
+import { State, getSelectedPerson } from '../reducers';
 
 @Component({
   selector: 'person-edit',
@@ -21,12 +23,13 @@ export class EditController implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private personService: PersonService
+    private store: Store<State>
   ) { }
 
   ngOnInit() {
     this.person$ = this.route.params.pipe(
-      switchMap(params => this.personService.find(+params['id']))
+      tap(params => this.store.dispatch(new Select(+params['id']))),
+      switchMap(() => this.store.select(getSelectedPerson))
     );
   }
 
@@ -35,7 +38,7 @@ export class EditController implements OnInit {
   }
 
   updatePerson(p: Person) {
-    this.personService.update(p).subscribe();
+    this.store.dispatch(new Update(p));
   }
 
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Person } from '../models';
-import { PersonService } from '../services';
+import { Create } from '../actions';
+import { State } from '../reducers';
 
 @Component({
   selector: 'person-add',
@@ -17,7 +19,7 @@ export class AddController implements OnInit {
 
   constructor(
     private router: Router,
-    private personService: PersonService
+    private store: Store<State>
   ) { }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class AddController implements OnInit {
   }
 
   addPerson(p: Person) {
-    this.personService.add(p).subscribe();
+    this.store.dispatch(new Create(p));
   }
 
 }

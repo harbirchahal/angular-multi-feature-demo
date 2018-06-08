@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { Person } from '../models';
 
 @Injectable()
 export class PersonService {
-  subject: BehaviorSubject<Person[]> = new BehaviorSubject<Person[]>([]);
   DATA: Person[] = [
     { id: 1, firstname: 'Phil', lastname: 'Dyer', email: 'phil.dyer@gmail.com', isActive: true },
     { id: 2, firstname: 'Victoria', lastname: 'Smith', email: 'victoria.smith@gmail.com', isActive: true },
@@ -19,31 +18,23 @@ export class PersonService {
     { id: 10, firstname: 'Diane', lastname: 'Hughes', email: 'diane.hughes@gmail.com', isActive: false }
   ];
 
-  constructor() {
-    this.subject.next(this.DATA);
-  }
+  constructor() { }
 
   load(): Observable<Person[]> {
-    return this.subject.asObservable();
+    return of(this.DATA);
   }
 
-  find(id: number): Observable<Person> {
-    return of(this.DATA.find(p => p.id === id));
-  }
-
-  add(person: Person): Observable<boolean> {
+  create(person): Observable<Person> {
     person.id = this.DATA.length + 1;
     person.isActive = false;
     this.DATA.unshift(person);
-    this.subject.next([...this.DATA]);
-    return of(true);
+    return of(person);
   }
 
-  update(person: Person): Observable<boolean> {
+  update(person: Person): Observable<Person> {
     const index = this.DATA.findIndex((p => p.id === person.id));
     this.DATA[index] = person;
-    this.subject.next([...this.DATA]);
-    return of(true);
+    return of(person);
   }
 
 }
