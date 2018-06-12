@@ -10,9 +10,24 @@ import { PSearch } from '../../models';
 })
 export class LookupComponent implements OnInit {
   @Input() query: PSearch;
+  @Input() loading: boolean;
   @Output('apply') search = new EventEmitter<PSearch>();
 
   constructor() { }
+
+  get verboseQuery() {
+    let asString = [];
+    if (this.query.firstname) {
+      asString.push(`First Name like "${this.query.firstname}"`);
+    }
+    if (this.query.lastname) {
+      asString.push(`Last Name like "${this.query.lastname}"`);
+    }
+    if (this.query.email) {
+      asString.push(`Email like "${this.query.email}"`);
+    }
+    return asString.join(' OR ');
+  }
 
   ngOnInit() {
   }

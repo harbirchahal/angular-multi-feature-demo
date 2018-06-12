@@ -59,3 +59,8 @@ export const getSearchResult = createSelector(
   getSearchState,
   (state) => state.result
 );
+
+export const getSearchLoading = createSelector(
+  getSearchState,
+  (state) => state.loading
+);

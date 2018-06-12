@@ -6,7 +6,7 @@
         <mat-icon>undo</mat-icon>
       </button> -->
     </mat-card-title>
-    <mat-card-subtitle>
+    <mat-card-content>
       <div class="row">
         <div class="col">
           <mat-form-field>
@@ -26,7 +26,13 @@
         <div class="col-2">
           <button type="submit" mat-raised-button>Apply</button>
         </div>
+        <div class="col-1" *ngIf="loading">
+          <mat-spinner [diameter]="30" [strokeWidth]="3"></mat-spinner>
+        </div>
       </div>
-    </mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-actions *ngIf="verboseQuery">
+      Query: {{ verboseQuery }}
+    </mat-card-actions>
   </mat-card>
 </form>

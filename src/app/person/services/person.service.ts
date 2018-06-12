@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { Person, PSearch } from '../models';
 
@@ -35,7 +36,7 @@ export class PersonService {
           || query.email && p.email.includes(query.email)
         );
       })
-    );
+    ).pipe(delay(1000));
   }
   
   create(person: Person): Observable<Person> {

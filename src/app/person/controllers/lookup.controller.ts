@@ -6,13 +6,14 @@ import { tap } from 'rxjs/operators';
 
 import { Person, PSearch } from '../models';
 import { Search } from '../actions';
-import { State, getSearchQuery, getSearchResult } from '../reducers';
+import { State, getSearchQuery, getSearchResult, getSearchLoading } from '../reducers';
 
 @Component({
   selector: 'person-lookup',
   template: `
     <lookup-page 
       [query]="query$ | async"
+      [loading]="loading$ | async"
       (apply)="searchPerson($event)"></lookup-page>
     <list-page 
       [persons]="result$ | async"
@@ -22,6 +23,7 @@ import { State, getSearchQuery, getSearchResult } from '../reducers';
 export class LookupController implements OnInit {
   query$: Observable<PSearch>;
   result$: Observable<Person[]>;
+  loading$: Observable<boolean>;
 
   constructor(
     private router: Router,
@@ -30,6 +32,7 @@ export class LookupController implements OnInit {
   ) {
     this.query$ = this.store.select(getSearchQuery);
     this.result$ = this.store.select(getSearchResult);
+    this.loading$ = this.store.select(getSearchLoading);
   }
 
   ngOnInit() {
