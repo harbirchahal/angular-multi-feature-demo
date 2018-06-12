@@ -18,7 +18,7 @@ import { State, getSelectedPerson } from '../reducers';
   `,
 })
 export class EditController implements OnInit {
-  private person$: Observable<Person>;
+  person$: Observable<Person>;
 
   constructor(
     private router: Router,

@@ -4,10 +4,7 @@ import {
   EntityAdapter,
   createEntityAdapter,
 } from '@ngrx/entity';
-import {
-  createSelector,
-  createFeatureSelector
-} from '@ngrx/store';
+
 import { Person } from '../models';
 import { ActionTypes, ActionsUnion } from '../actions';
 
@@ -26,7 +23,7 @@ export const adapter: EntityAdapter<Person> = createEntityAdapter<Person>({
   sortComparer: false /* sortByFullName */
 });
 
-export const initialState: State = adapter.getInitialState({
+const initialState: State = adapter.getInitialState({
   selectedPersonId: null
 });
 

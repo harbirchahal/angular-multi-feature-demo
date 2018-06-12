@@ -1,0 +1,32 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+  <mat-card>
+    <mat-card-title>
+      <span>Filters</span>
+      <!-- <button mat-icon-button matTooltip="Undo changes">
+        <mat-icon>undo</mat-icon>
+      </button> -->
+    </mat-card-title>
+    <mat-card-subtitle>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <input matInput name="firstname" placeholder="First Name Like" [ngModel]="query.firstname">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <input matInput name="lastname" placeholder="Last Name Like" [ngModel]="query.lastname">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <input matInput name="email" placeholder="Email Like" [ngModel]="query.email">
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <button type="submit" mat-raised-button>Apply</button>
+        </div>
+      </div>
+    </mat-card-subtitle>
+  </mat-card>
+</form>

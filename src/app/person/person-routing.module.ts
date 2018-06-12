@@ -6,7 +6,8 @@ import {
   HomeController,
   AddController,
   ListController,
-  EditController
+  EditController,
+  LookupController
 } from './controllers';
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'home', component: HomeController },
       { path: 'new', component: AddController },
       { path: 'list', component: ListController },
+      { path: 'lookup', component: LookupController },
       { path: ':id', component: EditController },
       { path: '**', redirectTo: 'home' }
     ]

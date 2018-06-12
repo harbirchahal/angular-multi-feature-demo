@@ -6,10 +6,10 @@ export interface Person {
   isActive: boolean;
 }
 
-// export const PERSON: Person = {
-//   id: 0,
-//   firstname: '',
-//   lastname: '',
-//   email: '',
-//   isActive: false
-// };
+export const EMPTY_PERSON: Person = {
+  id: 0,
+  firstname: '',
+  lastname: '',
+  email: '',
+  isActive: false
+};

@@ -5,13 +5,15 @@ import {
   MatIconModule,
   MatCardModule,
   MatButtonModule,
+  MatGridListModule,
   MatListModule,
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
   MatInputModule,
   MatTooltipModule,
-  MatChipsModule
+  MatChipsModule,
+  MatSlideToggleModule
 } from '@angular/material';
 
 const MODULES = [
@@ -20,13 +22,15 @@ const MODULES = [
   MatIconModule,
   MatCardModule,
   MatButtonModule,
+  MatGridListModule,
   MatListModule,
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
   MatInputModule,
   MatTooltipModule,
-  MatChipsModule
+  MatChipsModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({

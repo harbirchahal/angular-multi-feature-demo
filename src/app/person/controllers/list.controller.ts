@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { Person } from '../models';
 import { Load } from '../actions';
@@ -16,7 +17,7 @@ import { State, getAllPersons } from '../reducers';
   `,
 })
 export class ListController implements OnInit {
-  private persons$: Observable<Person[]>;
+  persons$: Observable<Person[]>;
 
   constructor(
     private router: Router,

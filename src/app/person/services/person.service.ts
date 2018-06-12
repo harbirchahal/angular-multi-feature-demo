@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { Person } from '../models';
+import { Person, PSearch } from '../models';
 
 @Injectable()
 export class PersonService {
@@ -24,7 +24,21 @@ export class PersonService {
     return of(this.DATA);
   }
 
-  create(person): Observable<Person> {
+  find(query: PSearch): Observable<Person[]> {
+    // ToDo: case-insensitive search
+    return of(this.DATA
+      .map(p => p)
+      .filter(p => {
+        return (
+          query.firstname && p.firstname.includes(query.firstname)
+          || query.lastname && p.lastname.includes(query.lastname)
+          || query.email && p.email.includes(query.email)
+        );
+      })
+    );
+  }
+  
+  create(person: Person): Observable<Person> {
     person.id = this.DATA.length + 1;
     person.isActive = false;
     this.DATA.unshift(person);

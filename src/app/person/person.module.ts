@@ -9,20 +9,25 @@ import { MaterialModule } from '../material';
 import { PersonRoutingModule } from './person-routing.module';
 import { PersonComponent } from './person.component';
 import { PersonService } from './services';
-import { PersonEffects } from './effects';
+import {
+  PersonEffects,
+  SearchEffects
+} from './effects';
 import {
   HomeComponent,
   AddComponent,
   ListComponent,
-  EditComponent
+  EditComponent,
+  LookupComponent
 } from './components';
 import {
   HomeController,
   AddController,
   ListController,
-  EditController
+  EditController,
+  LookupController
 } from './controllers';
-import { reducer } from './reducers';
+import { reducers } from './reducers';
 
 @NgModule({
   imports: [
@@ -32,8 +37,8 @@ import { reducer } from './reducers';
     ChartsModule,
     MaterialModule,
     PersonRoutingModule,
-    StoreModule.forFeature('person', reducer),
-    EffectsModule.forFeature([PersonEffects])
+    StoreModule.forFeature('person', reducers),
+    EffectsModule.forFeature([PersonEffects, SearchEffects])
   ],
   declarations: [
     PersonComponent,
@@ -41,11 +46,12 @@ import { reducer } from './reducers';
     AddComponent,
     ListComponent,
     EditComponent,
+    LookupComponent,
     HomeController,
     AddController,
     ListController,
     EditController,
-    AddComponent
+    LookupController
   ],
   providers: [
     PersonService

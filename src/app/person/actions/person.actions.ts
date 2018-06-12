@@ -1,26 +1,8 @@
 import { Action } from '@ngrx/store';
 
+import { ActionWithPayload } from './action-with-payload';
+import { ActionTypes } from './action-types.enum';
 import { Person } from '../models';
-
-export interface ActionWithPayload extends Action {
-  payload: any;
-} 
-
-export enum ActionTypes {
-  Create = '[Person] Create',
-  CreateSuccess = '[Person] Create Success',
-  CreateFailure = '[Person] Create Failure',
-
-  Update = '[Person] Update',
-  UpdateSuccess = '[Person] Update Success',
-  UpdateFailure = '[Person] Update Failure',
-
-  Load = '[Person] Load',
-  LoadSuccess = '[Person] Load Success',
-  LoadFailure = '[Person] Load Failure',
-
-  Select = '[Book] Select',
-}
 
 /*  CREATE Actions */
 export class Create implements ActionWithPayload {
@@ -77,20 +59,9 @@ export class LoadFailure implements ActionWithPayload {
   constructor(public payload: any) {}
 }
 
+/* SELECT Actions */
 export class Select implements ActionWithPayload {
   readonly type = ActionTypes.Select;
 
   constructor(public payload: number) {}
 }
-
-export type ActionsUnion =
-  | Create
-  | CreateSuccess
-  | CreateFailure
-  | Update
-  | UpdateSuccess
-  | UpdateFailure
-  | Load
-  | LoadSuccess
-  | LoadFailure
-  | Select;

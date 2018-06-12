@@ -9,9 +9,10 @@ import { MatSidenav } from '@angular/material';
 })
 export class PersonComponent implements OnInit {
   navLinks = [
-    { link: 'home', label: 'Dashboard'},
-    { link: 'list', label: 'Listing'},
-    { link: 'new', label: 'Add Person'},
+    { link: 'home', label: 'Dashboard', icon: 'dashboard'},
+    { link: 'list', label: 'Listing', icon: 'list'},
+    { link: 'lookup', label: 'Lookup', icon: 'search'},
+    { link: 'new', label: 'Add Person', icon: 'add'},
   ];
   @ViewChild('sidenav') sidenav: MatSidenav;
 

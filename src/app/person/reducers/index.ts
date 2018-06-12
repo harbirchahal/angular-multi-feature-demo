@@ -4,25 +4,25 @@ import {
   ActionReducerMap,
 } from '@ngrx/store';
 import * as fromPerson from './person.reducers'; 
+import * as fromSearch from './search.reducers'; 
 
-export {
-  State,
-  reducer
-} from './person.reducers';
+export interface State {
+  people: fromPerson.State;
+  search: fromSearch.State;
+}
 
-type State = fromPerson.State;
+export const reducers: ActionReducerMap<State> = {
+  people: fromPerson.reducer,
+  search: fromSearch.reducer,
+}
 
-// export interface State {
-//   person: fromPerson.State;
-//   search: fromSearch.State;
-// }
+const featureSelector = createFeatureSelector<State>('person');
 
-// export const reducers: ActionReducerMap<State> = {
-//   person: fromPerson.reducer,
-//   search: fromSearch.reducer,
-// }
-
-export const getPersonState = createFeatureSelector<State>('person');
+/* PERSON */
+const getPersonState = createSelector(
+  featureSelector,
+  (state) => state.people
+);
 
 export const {
   selectIds: getPersonIds,
@@ -43,3 +43,19 @@ export const getSelectedPerson =  createSelector(
     return selectedId && entities[selectedId];
   }
 )
+
+/* SEARCH */
+const getSearchState = createSelector(
+  featureSelector,
+  (state) => state.search
+);
+
+export const getSearchQuery = createSelector(
+  getSearchState,
+  (state) => state.query
+);
+
+export const getSearchResult = createSelector(
+  getSearchState,
+  (state) => state.result
+);

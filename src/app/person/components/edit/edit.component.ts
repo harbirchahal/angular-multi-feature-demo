@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { Person } from '../../models';
 
@@ -14,10 +13,7 @@ export class EditComponent implements OnInit {
   @Output() cancel = new EventEmitter<null>();
   @Output() save = new EventEmitter<Person>();
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -26,8 +22,8 @@ export class EditComponent implements OnInit {
     this.cancel.emit();
   }
 
-  onSubmit() {
-    this.save.emit(this.person);
+  onSubmit(form: Person) {
+    this.save.emit(form);
   }
 
 }
