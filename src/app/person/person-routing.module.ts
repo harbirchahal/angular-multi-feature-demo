@@ -9,11 +9,16 @@ import {
   EditController,
   LookupController
 } from './controllers';
+import {
+  LoadPeopleGuard,
+  LoadPeopleResolver
+} from './guards';
 
 const routes: Routes = [
   {
     path: '',
     component: PersonComponent,
+    // canActivate: [ LoadPeopleGuard ],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeController },
@@ -22,7 +27,8 @@ const routes: Routes = [
       { path: 'lookup', component: LookupController },
       { path: ':id', component: EditController },
       { path: '**', redirectTo: 'home' }
-    ]
+    ],
+    resolve: { loaded: LoadPeopleResolver }
   },
 ];
 
@@ -33,5 +39,9 @@ const routes: Routes = [
   exports: [
     RouterModule
   ],
+  providers: [
+    // LoadPeopleGuard,
+    LoadPeopleResolver
+  ]
 })
 export class PersonRoutingModule { }

@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { Person } from '../models';
-import { Load } from '../actions';
 import { State, getAllPersons } from '../reducers';
 
 @Component({
@@ -27,7 +26,6 @@ export class ListController implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new Load());
   }
 
   navToDetail(id: number) {
