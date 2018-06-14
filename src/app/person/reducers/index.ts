@@ -44,6 +44,26 @@ export const getSelectedPerson =  createSelector(
   }
 )
 
+export const getActivePersons = createSelector(
+  getAllPersons,
+  (persons) => persons.filter(p => p.isActive)
+);
+
+export const getActivePersonsCount = createSelector(
+  getActivePersons,
+  (persons) => persons.length
+);
+
+export const getInactivePersons = createSelector(
+  getAllPersons,
+  (persons) => persons.filter(p => !p.isActive)
+);
+
+export const getInactivePersonsCount = createSelector(
+  getInactivePersons,
+  (persons) => persons.length
+);
+
 /* SEARCH */
 const getSearchState = createSelector(
   featureSelector,
