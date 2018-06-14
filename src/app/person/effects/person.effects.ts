@@ -12,22 +12,11 @@ import {
   CreateFailure,
   Update,
   UpdateSuccess,
-  UpdateFailure,
-  Load,
-  LoadSuccess,
-  LoadFailure,
+  UpdateFailure
 } from '../actions';
 
 @Injectable()
 export class PersonEffects {
-  
-  @Effect()
-  load$: Observable<Action> = this.actions$.pipe(
-    ofType<Load>(ActionTypes.Load),
-    switchMap(() => this.personService.load()),
-    map(persons => new LoadSuccess(persons)),
-    catchError(err => of(new LoadFailure(err)))
-  );
   
   @Effect()
   create$: Observable<Action> = this.actions$.pipe(

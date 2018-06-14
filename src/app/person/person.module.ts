@@ -9,10 +9,7 @@ import { MaterialModule } from '../material';
 import { PersonRoutingModule } from './person-routing.module';
 import { PersonComponent } from './person.component';
 import { PersonService } from './services';
-import {
-  PersonEffects,
-  SearchEffects
-} from './effects';
+import { effects } from './effects';
 import {
   HomeComponent,
   AddComponent,
@@ -38,7 +35,7 @@ import { reducers } from './reducers';
     MaterialModule,
     PersonRoutingModule,
     StoreModule.forFeature('person', reducers),
-    EffectsModule.forFeature([PersonEffects, SearchEffects])
+    EffectsModule.forFeature(effects)
   ],
   declarations: [
     PersonComponent,
