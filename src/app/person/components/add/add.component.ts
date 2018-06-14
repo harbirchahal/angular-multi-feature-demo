@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Person } from  '../../models';
 
@@ -9,10 +10,19 @@ import { Person } from  '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddComponent implements OnInit {
+  addForm: FormGroup;
   @Output() cancel = new EventEmitter<null>();
   @Output() save = new EventEmitter<Person>();
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.addForm = this.formBuilder.group({
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email])
+    });
+  }
 
   ngOnInit() {
   }
@@ -21,8 +31,8 @@ export class AddComponent implements OnInit {
     this.cancel.emit();
   }
 
-  onSubmit(form: Person) {
-    this.save.emit(form);
+  onSubmit() {
+    this.save.emit(this.addForm.value);
   }
 
 }

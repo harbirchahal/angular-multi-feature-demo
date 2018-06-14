@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Person } from '../../models';
 
@@ -8,22 +9,39 @@ import { Person } from '../../models';
   styleUrls: ['./edit.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush  
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnChanges {
+  editForm: FormGroup;
   @Input() person: Person;
   @Output() cancel = new EventEmitter<null>();
   @Output() save = new EventEmitter<Person>();
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.editForm = this.formBuilder.group({
+      id: new FormControl(0),
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      email: new FormControl(''),
+      isActive: new FormControl(false)
+    });
+  }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.person) {
+      this.editForm.setValue(changes.person.currentValue);
+    }
   }
 
   onCancel() {
     this.cancel.emit();
   }
 
-  onSubmit(form: Person) {
-    this.save.emit(form);
+  onSubmit() {
+    this.save.emit(this.editForm.value);
   }
 
 }
