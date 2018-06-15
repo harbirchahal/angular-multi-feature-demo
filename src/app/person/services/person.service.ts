@@ -48,6 +48,14 @@ export class PersonService {
     ).pipe(delay(1000));
   }
   
+  activeCount(): Observable<number> {
+    return of(this.DATA.filter(p => p.isActive).length);
+  }
+
+  inactiveCount(): Observable<number> {
+    return of(this.DATA.filter(p => !p.isActive).length);
+  }
+
   create(person: Person): Observable<Person> {
     person.id = this.DATA.length + 1;
     person.isActive = false;

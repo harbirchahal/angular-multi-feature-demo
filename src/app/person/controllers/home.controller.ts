@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 
-import { State, getActivePersonsCount, getInactivePersonsCount } from '../reducers';
+import { State } from '../reducers';
+import { PersonService } from '../services';
 
 @Component({
   selector: 'person-home',
@@ -17,10 +18,11 @@ export class HomeController implements OnInit {
   inactive$: Observable<number>;
 
   constructor(
-    private store: Store<State>
+    private store: Store<State>,
+    private service: PersonService
   ) {
-    this.active$ = this.store.select(getActivePersonsCount);
-    this.inactive$ = this.store.select(getInactivePersonsCount);
+    this.active$ = this.service.activeCount();
+    this.inactive$ = this.service.inactiveCount();
   }
 
   ngOnInit() {
