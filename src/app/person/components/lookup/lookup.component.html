@@ -1,4 +1,4 @@
-<form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+<form [formGroup]="qForm" (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-title>
       <span>Filters</span>
@@ -6,25 +6,32 @@
         <mat-icon>undo</mat-icon>
       </button> -->
     </mat-card-title>
+    <mat-card-subtitle>
+      Atleat one input is required
+    </mat-card-subtitle>
     <mat-card-content>
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <input matInput name="firstname" placeholder="First Name Like" [ngModel]="query.firstname">
+            <input matInput type="text" id="firstname" placeholder="First Name Like"
+              formControlName="firstname">
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field>
-            <input matInput name="lastname" placeholder="Last Name Like" [ngModel]="query.lastname">
+            <input matInput type="text" id="lastname" placeholder="Last Name Like"
+              formControlName="lastname">
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field>
-            <input matInput name="email" placeholder="Email Like" [ngModel]="query.email">
+            <input matInput type="email" id="email" placeholder="Email Like"
+              formControlName="email">
           </mat-form-field>
         </div>
         <div class="col-2">
-          <button type="submit" mat-raised-button>Apply</button>
+          <button type="submit" mat-raised-button
+            [disabled]="qForm.invalid">Apply</button>
         </div>
         <div class="col-1" *ngIf="loading">
           <mat-spinner [diameter]="30" [strokeWidth]="3"></mat-spinner>

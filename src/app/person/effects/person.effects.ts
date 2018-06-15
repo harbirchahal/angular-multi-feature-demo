@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, switchMap, catchError, tap } from 'rxjs/operators';
 
 import { PersonService } from '../services';
 import {
@@ -23,6 +24,7 @@ export class PersonEffects {
     ofType<Create>(ActionTypes.Create),
     switchMap(action => this.personService.create(action.payload)),
     map(person => new CreateSuccess(person)),
+    tap(action => this.router.navigate(['person', action.payload.id])),
     catchError(err => of(new CreateFailure(err)))
   );
 
@@ -36,7 +38,8 @@ export class PersonEffects {
 
   constructor(
     private actions$: Actions,
-    private personService: PersonService
+    private personService: PersonService,
+    private router: Router
   ) { }
 
 }
