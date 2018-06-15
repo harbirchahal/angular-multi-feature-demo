@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
-import { PSearch } from '../../models';
+import { Person, PSearch } from '../../models';
 
 @Component({
   selector: 'lookup-page',
@@ -49,9 +49,9 @@ export class LookupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    if (this.qForm.valid) {
-      this.search.emit(this.qForm.value);
-    }
+    // if (this.qForm.valid) {
+    //   this.search.emit(this.qForm.value);
+    // }
   }
 
   ngOnChanges(changes: SimpleChanges) {

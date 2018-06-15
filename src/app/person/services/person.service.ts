@@ -16,13 +16,22 @@ export class PersonService {
     { id: 7, firstname: 'Pippa', lastname: 'Johnston', email: 'pippa.johnston@gmail.com', isActive: true },
     { id: 8, firstname: 'Rachel', lastname: 'Carr', email: 'rachel.carr@gmail.com', isActive: true },
     { id: 9, firstname: 'Claire', lastname: 'Anderson', email: 'claire.anderson@gmail.com', isActive: false },
-    { id: 10, firstname: 'Diane', lastname: 'Hughes', email: 'diane.hughes@gmail.com', isActive: false }
+    { id: 10, firstname: 'Diane', lastname: 'Hughes', email: 'diane.hughes@gmail.com', isActive: false },
+    { id: 11, firstname: 'Natalie', lastname: 'Johnston', email: 'natalie.johnston@gmail.com', isActive: true },
+    { id: 12, firstname: 'Abigail', lastname: 'Manning', email: 'abigail.manning@gmail.com', isActive: false },
+    { id: 13, firstname: 'Angela', lastname: 'Coleman', email: 'angela.coleman@gmail.com', isActive: false },
+    { id: 14, firstname: 'Andrew', lastname: 'Baker', email: 'andrew.baker@gmail.com', isActive: false },
+    { id: 15, firstname: 'Tracey', lastname: 'Howard', email: 'tracey.howard@gmail.com', isActive: true }
   ];
 
   constructor() { }
 
-  load(): Observable<Person[]> {
-    return of(this.DATA);
+  load(options: any): Observable<{data: Person[], options: any}> {
+    options['length'] = this.DATA.length;
+    const start = options.pageIndex * options.pageSize;
+    const end = start + options.pageSize;
+    const data = this.DATA.slice(start, end);
+    return of({ data, options });
   }
 
   find(query: PSearch): Observable<Person[]> {

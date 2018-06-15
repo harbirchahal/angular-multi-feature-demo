@@ -64,6 +64,11 @@ export const getInactivePersonsCount = createSelector(
   (persons) => persons.length
 );
 
+export const getLoadPaginator = createSelector(
+  getPersonState,
+  (state) => state.pagination
+);
+
 /* SEARCH */
 const getSearchState = createSelector(
   featureSelector,

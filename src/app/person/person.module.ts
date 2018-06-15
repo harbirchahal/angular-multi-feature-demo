@@ -15,7 +15,8 @@ import {
   AddComponent,
   ListComponent,
   EditComponent,
-  LookupComponent
+  LookupComponent,
+  PaginateComponent
 } from './components';
 import {
   HomeController,
@@ -48,7 +49,8 @@ import { reducers } from './reducers';
     AddController,
     ListController,
     EditController,
-    LookupController
+    LookupController,
+    PaginateComponent
   ],
   providers: [
     PersonService

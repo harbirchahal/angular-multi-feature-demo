@@ -5,11 +5,12 @@ import {
   createEntityAdapter,
 } from '@ngrx/entity';
 
-import { Person } from '../models';
+import { Person, Page } from '../models';
 import { ActionTypes, ActionsUnion } from '../actions';
 
 export interface State extends EntityState<Person> {
   selectedPersonId: number | null;
+  pagination: Page;
 }
 
 // function sortByFullName(p1: Person, p2: Person) {
@@ -24,13 +25,26 @@ export const adapter: EntityAdapter<Person> = createEntityAdapter<Person>({
 });
 
 const initialState: State = adapter.getInitialState({
-  selectedPersonId: null
+  selectedPersonId: null,
+  pagination: {
+    length: 0,
+    pageIndex: 0,
+    pageSize: 10,
+    pageSizeOptions: [10, 25, 50, 100]
+  }
 });
 
 export function reducer(state = initialState, action: ActionsUnion): State {
   switch(action.type) {
     case ActionTypes.CreateSuccess: {
-      return adapter.addOne(action.payload, state);
+      const uState = {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          length: state.pagination.length + 1
+        }
+      };
+      return adapter.addOne(action.payload, uState);
     }
 
     case ActionTypes.UpdateSuccess: {
@@ -39,9 +53,19 @@ export function reducer(state = initialState, action: ActionsUnion): State {
     }
 
     case ActionTypes.LoadSuccess: {
-      return adapter.addAll(action.payload, state);
+      const { data, options } = action.payload;
+      const uState = {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          length: options.length,
+          pageIndex: options.pageIndex,
+          pageSize: options.pageSize
+        }
+      };
+      return adapter.addAll(data, uState);
     }
-    
+
     case ActionTypes.Select: {
       return {
         ...state,
