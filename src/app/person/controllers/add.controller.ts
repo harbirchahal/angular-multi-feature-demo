@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -12,7 +13,7 @@ import { State } from '../reducers';
   selector: 'person-add',
   template: `
     <add-page
-      (cancel)="navToList()"
+      (cancel)="navBack()"
       (save)="addPerson($event)"></add-page>
   `,
 })
@@ -20,14 +21,15 @@ export class AddController implements OnInit {
 
   constructor(
     private router: Router,
-    private store: Store<State>
+    private store: Store<State>,
+    private location: Location
   ) { }
 
   ngOnInit() {
   }
 
-  navToList() {
-    this.router.navigate(['person', 'list']);
+  navBack() {
+    this.location.back();
   }
 
   addPerson(p: Person) {

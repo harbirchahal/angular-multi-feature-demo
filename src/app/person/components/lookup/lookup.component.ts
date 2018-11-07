@@ -49,9 +49,9 @@ export class LookupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    // if (this.qForm.valid) {
-    //   this.search.emit(this.qForm.value);
-    // }
+    if (this.qForm.valid) {
+      this.search.emit(this.qForm.value);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

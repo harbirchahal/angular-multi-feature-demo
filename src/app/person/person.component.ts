@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material';
+import { Store } from '@ngrx/store';
+
+import { State } from './reducers';
+import { ResetSearch } from './actions';
 
 @Component({
   selector: 'app-person',
@@ -17,7 +21,8 @@ export class PersonComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private store: Store<State>
   ) { }
 
   ngOnInit() {
@@ -25,6 +30,9 @@ export class PersonComponent implements OnInit {
 
   navigateTo (to: string) {
     this.sidenav.close();
+    if (to === 'lookup') {
+      this.store.dispatch(new ResetSearch());
+    }
     this.router.navigate(['person', to]);
   };
 

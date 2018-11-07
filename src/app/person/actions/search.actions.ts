@@ -29,3 +29,7 @@ export class SearchError implements ActionWithPayload {
 
   constructor(public payload: any) {}
 }
+
+export class ResetSearch implements Action {
+  readonly type = ActionTypes.ResetSearch;
+}

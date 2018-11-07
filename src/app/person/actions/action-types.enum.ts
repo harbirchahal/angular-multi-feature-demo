@@ -17,4 +17,6 @@ export enum ActionTypes {
   SearchInitiated = '[Person] Search Initiated',
   SearchComplete = '[Person] Search Complete',
   SearchError = '[Person] Search Error',
+
+  ResetSearch = '[Person] Search Reset'
 }

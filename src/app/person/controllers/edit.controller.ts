@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -13,7 +14,7 @@ import { State, getSelectedPerson } from '../reducers';
   template: `
     <edit-page 
       [person]="person$ | async"
-      (cancel)="navToList()"
+      (cancel)="navBack()"
       (save)="updatePerson($event)"></edit-page>
   `,
 })
@@ -23,7 +24,8 @@ export class EditController implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<State>
+    private store: Store<State>,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -33,8 +35,8 @@ export class EditController implements OnInit {
     );
   }
 
-  navToList() {
-    this.router.navigate(['person', 'list']);
+  navBack() {
+    this.location.back();
   }
 
   updatePerson(p: Person) {

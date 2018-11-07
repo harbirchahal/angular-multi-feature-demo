@@ -38,6 +38,12 @@ export function reducer(state = initialState, action: ActionsUnion) {
       };
     }
 
+    case ActionTypes.ResetSearch: {
+      return {
+        ...initialState
+      };
+    }
+
     default: {
       return state;
     }

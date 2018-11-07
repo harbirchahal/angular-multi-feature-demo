@@ -22,4 +22,5 @@ export type ActionsUnion =
   | searchActions.Search
   | searchActions.SearchInitiated
   | searchActions.SearchComplete
-  | searchActions.SearchError;
+  | searchActions.SearchError
+  | searchActions.ResetSearch;
